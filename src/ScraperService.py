@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 import textwrap
 from dotenv import load_dotenv
 
-# Cargar variables de entorno desde el archivo .env
 load_dotenv()
 
 
