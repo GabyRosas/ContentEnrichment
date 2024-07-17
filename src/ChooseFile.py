@@ -1,4 +1,5 @@
 from FileManager import FileManager, Content
+from input_handler import choice_user
 
 class ChooseFile:
     def show_menu(self):
@@ -18,7 +19,7 @@ class ChooseFile:
         while True:
             try:
                 self.show_menu()
-                choice = input("Ingrese su elección (1-4): ")
+                choice = choice_user("Ingrese su elección (1-4): ")
 
                 if choice in ['1', '2', '3']:
                     if choice == '1':

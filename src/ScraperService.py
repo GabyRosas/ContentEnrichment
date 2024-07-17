@@ -34,18 +34,11 @@ class ScraperService:
         formatted_content = "_".join(word_list)
         return formatted_content
 
-
-if __name__ == "__main__":
-    scraper_service = ScraperService()
-    search_query = input("Search: ")
-    paragraphs = scraper_service.get_wiki_content(search_query)
-
-    wrapper = textwrap.TextWrapper(width=100)
-    for i in range(min(5, len(paragraphs))):
-        paragraph_text = paragraphs[i].text.strip()
-        wrapped_text = wrapper.fill(paragraph_text)
-        print(wrapped_text)
-        print()
-
-
-
+    def format_paragraphs(self, paragraphs, width=100, max_paragraphs=5):
+        wrapper = textwrap.TextWrapper(width=width)
+        formatted_paragraphs = []
+        for i in range(min(max_paragraphs, len(paragraphs))):
+            paragraph_text = paragraphs[i].text.strip()
+            wrapped_text = wrapper.fill(paragraph_text)
+            formatted_paragraphs.append(wrapped_text)
+        return formatted_paragraphs
