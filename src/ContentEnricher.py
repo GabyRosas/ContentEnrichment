@@ -10,7 +10,7 @@ from utils.input_handler import get_user_input
 class ContentEnricher:
     def main(self):
         scraper_service = ScraperService()
-        search_query = get_user_input("Search: ")
+        search_query = get_user_input("Introduce el término de búsqueda: ")
         paragraphs = scraper_service.get_wiki_content(search_query)
         formatted_paragraphs = scraper_service.format_paragraphs(paragraphs)
 

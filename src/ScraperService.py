@@ -36,7 +36,7 @@ class ScraperService:
         formatted_content = "_".join(word_list)
         return formatted_content
 
-    def format_paragraphs(self, paragraphs, width=100, max_paragraphs=5):
+    def format_paragraphs(self, paragraphs, width=100, max_paragraphs=6):
         wrapper = textwrap.TextWrapper(width=width)
         formatted_paragraphs = []
         for i in range(min(max_paragraphs, len(paragraphs))):
