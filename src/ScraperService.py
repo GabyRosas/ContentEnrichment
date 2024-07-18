@@ -19,7 +19,9 @@ class ScraperService:
             response = requests.get(url)
             response.raise_for_status()
             soup = BeautifulSoup(response.content, 'html.parser')
-            paragraphs = soup.find_all('p')
+            title = soup.find_all('h1')
+            parag = soup.find_all('p')
+            paragraphs = title + parag
             return paragraphs
         except requests.exceptions.RequestException as e:
             print(f'Error de red: {e}')
