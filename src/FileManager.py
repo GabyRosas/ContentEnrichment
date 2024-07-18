@@ -1,6 +1,7 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
+
 class FileManager:
     def __init__(self, content, default_filename):
         self.content = content
@@ -44,7 +45,14 @@ class FileManager:
         except Exception as e:
             print(f"Error saving TXT: {e}")
 
+
 class Content:
-    original_content = "Contenido original."
-    enriched_content = "Contenido enriquecido."
-    translated_content = "Contenido traducido."
+    def __init__(self, original_content=None, translated_content=None):
+        self.original_content = original_content
+        self.translated_content = translated_content
+
+    def set_original_content(self, content):
+        self.original_content = content
+
+    def set_translated_content(self, content):
+        self.translated_content = content

@@ -19,7 +19,9 @@ class ScraperService:
             response = requests.get(url)
             response.raise_for_status()
             soup = BeautifulSoup(response.content, 'html.parser')
-            paragraphs = soup.find_all('p')
+            title = soup.find_all('h1')
+            parag = soup.find_all('p')
+            paragraphs = title + parag
             return paragraphs
         except requests.exceptions.RequestException as e:
             print(f'Error de red: {e}')
@@ -34,7 +36,7 @@ class ScraperService:
         formatted_content = "_".join(word_list)
         return formatted_content
 
-    def format_paragraphs(self, paragraphs, width=100, max_paragraphs=5):
+    def format_paragraphs(self, paragraphs, width=100, max_paragraphs=6):
         wrapper = textwrap.TextWrapper(width=width)
         formatted_paragraphs = []
         for i in range(min(max_paragraphs, len(paragraphs))):
@@ -42,3 +44,5 @@ class ScraperService:
             wrapped_text = wrapper.fill(paragraph_text)
             formatted_paragraphs.append(wrapped_text)
         return formatted_paragraphs
+
+
