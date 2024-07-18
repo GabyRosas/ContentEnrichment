@@ -1,5 +1,8 @@
-from src.FileManager import FileManager, Content
-from utils.input_handler import get_user_input
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+
+from src.FileManager import FileManager
+
 
 class ChooseFile:
     def show_menu(self):
@@ -15,24 +18,24 @@ class ChooseFile:
         print("2. TXT")
         print("3. Volver al menú principal")
 
-    def main(self):
+    def main(self, content):
         while True:
             try:
                 self.show_menu()
-                choice = get_user_input("Ingrese su elección (1-4): ")
+                choice = input("Ingrese su elección (1-4): ")
 
                 if choice in ['1', '2', '3']:
                     if choice == '1':
-                        content = Content.original_content
+                        selected_content = content.original_content
                         default_filename = "original"
                     elif choice == '2':
-                        content = Content.enriched_content
+                        selected_content = content.enriched_content
                         default_filename = "enriched"
                     elif choice == '3':
-                        content = Content.translated_content
+                        selected_content = content.translated_content
                         default_filename = "translated"
 
-                    file_manager = FileManager(content, default_filename)
+                    file_manager = FileManager(selected_content, default_filename)
 
                     while True:
                         try:
