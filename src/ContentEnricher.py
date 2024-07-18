@@ -1,7 +1,6 @@
 from utils.ChooseFile import ChooseFile
 from ScraperService import ScraperService
 from utils.input_handler import get_user_input
-from utils.TranslatorText import TranslatorService
 
 #Aquí es donde tenemos que poner los bucles para que vaya primero una cosa u otra.
 class ContentEnricher:
@@ -14,7 +13,6 @@ class ContentEnricher:
             print(paragraph)
             print()
 
-        ScraperService().main()
         ChooseFile().main()
 
 
