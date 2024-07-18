@@ -44,3 +44,5 @@ class ScraperService:
             wrapped_text = wrapper.fill(paragraph_text)
             formatted_paragraphs.append(wrapped_text)
         return formatted_paragraphs
+
+
