@@ -1,14 +1,14 @@
-from ScraperService import ScraperService
-from TranslatorService import TranslatorService
-from src.FileManager import FileManager
+from .ScraperService import ScraperService
+from .TranslatorService import TranslatorService
 from src.FileManager import Content
-
 from utils.ChooseFile import ChooseFile
 from utils.input_handler import get_user_input
+from .EnricherService import EnricherService
 
 
 class ContentEnricher:
-    def main(self):
+    @staticmethod
+    def main():
         scraper_service = ScraperService()
         search_query = get_user_input("Introduce el término de búsqueda: ")
         paragraphs = scraper_service.get_wiki_content(search_query)
@@ -24,8 +24,7 @@ class ContentEnricher:
 
         src_lang_input = get_user_input('Tu lenguaje: ')
         tgt_lang_input = get_user_input('Lenguaje deseado: ')
-        translated_paragraphs = TranslatorService.translate_paragraphs(formatted_paragraphs, src_lang_input,
-                                                                       tgt_lang_input)
+        translated_paragraphs = TranslatorService.translate_paragraphs(formatted_paragraphs, src_lang_input,tgt_lang_input)
 
         content.set_translated_content("\n\n".join(translated_paragraphs))
 
@@ -34,9 +33,14 @@ class ContentEnricher:
             print(translated_paragraph)
             print()
 
+        formatted_content = "\n\n".join(formatted_paragraphs)
+        enriched_content = EnricherService.enrich(formatted_content)
+
+        content.set_enriched_content(enriched_content)
+
+        print("\nAhora te mostraremos el contenido Enriquecido:\n")
+        print(enriched_content)
+        print()
+
         ChooseFile().main(content)
-
-
-if __name__ == "__main__":
-    ContentEnricher().main()
 

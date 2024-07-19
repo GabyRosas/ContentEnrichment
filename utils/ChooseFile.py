@@ -50,13 +50,13 @@ class ChooseFile:
                             else:
                                 print("Opción no válida. Intente de nuevo.")
                         except Exception as e:
-                            print(f"Error processing format choice: {e}")
+                            print(f"Error procesando el formato de elección: {e}")
                 elif choice == '4':
                     print("Saliendo...")
                     break
                 else:
                     print("Opción no válida. Intente de nuevo.")
             except Exception as e:
-                print(f"Error processing main menu choice: {e}")
+                print(f"Error procesando el menu pricipal de elección: {e}")
 
 
