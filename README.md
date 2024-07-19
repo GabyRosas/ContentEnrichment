@@ -20,7 +20,7 @@ El proyecto **Content Enricher** tiene como propósito crear una herramienta que
 * Interacción del Usuario: Permite al usuario ingresar el tema y el idioma para la traducción, mostrando los resultados en la terminal.
 
 
-* Enriquecimiento de Contenido: Envía el contenido a la API para mejorar el texto y muestra el resultado en la terminal.
+* Enriquecimiento de Contenido: Envía el contenido a la API de textcortex para mejorar el texto y muestra el resultado en la terminal.
 
 
 * Traducción de Contenido: Traduce el contenido usando la DeepTranslate al idioma elegido por el usuario y muestra la traducción en la terminal.
@@ -100,10 +100,10 @@ git checkout -b feature/nombreDeTuRama
 Se utiliza BeautifulSoup para extraer el título del artículo y los primeros cinco párrafos de contenido del HTML obtenido.
 
 
-* Interacción con ChatGPT para Enriquecimiento de Contenido
+* Interacción con AI para Enriquecimiento de Contenido
 
 
-* El contenido extraído se envía a la API de ---- .
+* El contenido extraído se envía a la API de textcortex .
 
 
 * Se procesa la respuesta de la API para obtener el contenido enriquecido.
