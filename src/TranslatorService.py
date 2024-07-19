@@ -28,3 +28,9 @@ class TranslatorService:
         return translated_paragraphs
 
 
+class TranslatorText:
+    def main(self, text_input, src_lang_input, tgt_lang_input):
+        translation = TranslatorService.translate_text(text_input, src_lang_input, tgt_lang_input)
+        return translation
+
+
