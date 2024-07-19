@@ -1,5 +1,5 @@
 import pytest
-from translator import TranslatorText, TranslatorService
+from utils.TranslatorText import TranslatorText
 
 
 def mock_get_user_input(prompt):
