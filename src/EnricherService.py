@@ -3,9 +3,13 @@ import requests
 import os
 
 load_dotenv()
+
+
 class EnricherService:
     API_KEY = os.getenv('API_KEY')
     API_URL = os.getenv('API_URL')
+
+    @staticmethod
     def enrich(text):
         url = EnricherService.API_URL + "/texts/expansions"
         headers = {
@@ -19,13 +23,18 @@ class EnricherService:
             "max_tokens": 2048,
             "model": "claude-3-haiku",
             "n": 1,
-            "temperature": 0.8,
+            "temperature": 0,
             "text": text
         }
-        response = requests.post(url, json=json, headers=headers)
-        response = response.json()
 
-        if response['status'] == 'success':
-            return response['data']['outputs'][0]['text']
-        else:
+        try:
+            response = requests.post(url, json=json, headers=headers)
+            response = response.json()
+
+            if response['status'] == 'success':
+                return response['data']['outputs'][0]['text']
+            else:
+                return None
+        except requests.exceptions.RequestException as e:
+            print(f"Ha occurrido un error: {e}")
             return None

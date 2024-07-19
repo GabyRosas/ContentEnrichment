@@ -5,7 +5,6 @@
 - [Funcionalidades](#funcionalidades-)
 - [Tecnologías y Librerias Utilizadas](#tecnologías-y-librerias-utilizadas-)
 - [Instalación](#instalación-)
-- [Flujo](#flujo-)
 - [Desarrolladoras](#desarrolladoras-)
 
 ## Descripción del Proyecto 📖
@@ -20,10 +19,10 @@ El proyecto **Content Enricher** tiene como propósito crear una herramienta que
 * Interacción del Usuario: Permite al usuario ingresar el tema y el idioma para la traducción, mostrando los resultados en la terminal.
 
 
-* Enriquecimiento de Contenido: Envía el contenido a la API de textcortex para mejorar el texto y muestra el resultado en la terminal.
+* Enriquecimiento de Contenido: Envía el contenido original a la API de textcortex para mejorar el texto y muestra el resultado en la terminal.
 
 
-* Traducción de Contenido: Traduce el contenido usando la DeepTranslate al idioma elegido por el usuario y muestra la traducción en la terminal.
+* Traducción de Contenido: Traduce el contenido original con DeepTranslate al idioma elegido por el usuario y muestra la traducción en la terminal.
 
 
 * Generación de Archivos: Ofrece la opción de guardar el contenido original, enriquecido y traducido en formato .txt o .pdf, permitiendo al usuario elegir el nombre del archivo.
@@ -72,7 +71,7 @@ venv\Scripts\activate
 venv\Scripts\deactivate
 ```
 
-5. Realiza la otras intalaciones
+5. **Realiza la otras intalaciones**
 ```bash
 #Generará en la raíz del proyecto un fichero llamado requirements.txt
 pip freeze > requirements.txt
@@ -80,52 +79,12 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 ```
 
-6. Crea tu rama y comienza a trabajar!
+6. **Crea tu rama y comienza a trabajar!**
 
 ```bash
 #Crea la rama
 git checkout -b feature/nombreDeTuRama
 ```
-
-## Flujo ➡
-#### 1. Inicio de la Aplicación
-
-* El backend se inicializa y espera por solicitudes de los clientes (usuarios).
-#### 2. Recepción de Datos de Entrada
-
-* Se recibe una solicitud del cliente que incluye el tema de interés y el idioma de destino para la traducción.
-#### 3. Búsqueda y Extracción de Datos desde Wikipedia
-
-* Se utiliza la biblioteca Requests para enviar una solicitud a Wikipedia y obtener el contenido relevante del artículo basado en el tema proporcionado.
-Se utiliza BeautifulSoup para extraer el título del artículo y los primeros cinco párrafos de contenido del HTML obtenido.
-
-
-* Interacción con AI para Enriquecimiento de Contenido
-
-
-* El contenido extraído se envía a la API de textcortex .
-
-
-* Se procesa la respuesta de la API para obtener el contenido enriquecido.
-#### 4. Traducción del Contenido
-
-* Se utiliza la DeepTranslate para traducir el contenido enriquecido al idioma seleccionado por el usuario.
-Se recibe la traducción y se prepara para su entrega al cliente.
-#### 5. Generación de Archivos
-
-* Se prepara el contenido original, enriquecido y/o traducido para ser guardado en archivos .txt o .pdf según la elección del usuario.
-
-
-* Se utiliza ReportLab para generar archivos PDF si es necesario.
-
-
-* Envío de Respuesta al Cliente
-
-
-* Se envía la respuesta final al cliente, que puede incluir el contenido enriquecido, la traducción y/o la confirmación de la generación de archivos.
-#### 6.Finalización del Proceso
-
-* El backend concluye el procesamiento de la solicitud y queda a la espera de nuevas solicitudes.
 
 ## Desarrolladoras 🖥️
 [**Helena López**](https://github.com/helopgom)
