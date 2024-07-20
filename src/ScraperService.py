@@ -31,14 +31,14 @@ class ScraperService:
             cleaned_paragraphs = [self.remove_text_patterns(self.remove_zwsp(p.text)) for p in paragraphs]
             return cleaned_paragraphs
         except requests.exceptions.RequestException as e:
-            print(f'Error de red: {e}')
-            return []
+            print(f'Error de red: El tema ingresado no existe o está mal escrito')
+            raise
         except ValueError as e:
             print(f'Error: {e}')
-            return []
+            raise
         except Exception as e:
             print(f'Ocurrió un error: {e}')
-            return []
+            raise
 
     def format_content(self, content):
         try:
