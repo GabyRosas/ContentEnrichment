@@ -1,5 +1,5 @@
 import pytest
-from src.TranslatorService import TranslatorText
+from utils.TranslatorText import TranslatorText
 
 def test_invalid_language():
     translator = TranslatorText()
