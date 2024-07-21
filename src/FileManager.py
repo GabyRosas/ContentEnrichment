@@ -1,7 +1,5 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from utils.input_handler import get_user_input
 
 
 class FileManager:
@@ -11,7 +9,7 @@ class FileManager:
 
     def get_filename(self, extension):
         try:
-            filename = get_user_input(f"Introduce el nombre para el {extension} archivo (defecto: {self.default_filename}): ")
+            filename = input(f"Introduce el nombre para el {extension} archivo (defecto: {self.default_filename}): ")
             if not filename:
                 filename = self.default_filename
             if not filename.endswith(extension):
@@ -26,44 +24,26 @@ class FileManager:
             filename = self.get_filename(".pdf")
             c = canvas.Canvas(filename, pagesize=letter)
             width, height = letter
-            margin = 40
-            text_object = c.beginText(margin, height - margin)
+
+            # Check for ReportLab version and use appropriate alignment method
+            try:
+                # Attempt to use setTextAlignment if available (likely newer ReportLab)
+                text_object = c.beginText(40, height - 40)
+                text_object.setTextAlignment(0)  # 0 for left alignment
+            except AttributeError:
+                # Fallback to setting x and y coordinates for older ReportLab versions
+                text_object = c.beginText(40, height - 40)
+
             text_object.setFont("Helvetica", 12)
-            text_object.setTextOrigin(margin, height - margin)
 
-            max_width = width - 2 * margin
-            lines = self.wrap_text(self.content, text_object.getFontSize(), max_width)
-
-            for line in lines:
+            for line in self.content.split('\n'):
                 text_object.textLine(line)
 
             c.drawText(text_object)
             c.save()
             print(f"Archivo guardado como {filename}")
         except Exception as e:
-            print(f"Error al guardar el PDF: {e}")
-
-    def wrap_text(self, text, font_size, max_width):
-        from reportlab.lib.utils import stringWidth
-
-        lines = []
-        words = text.split()
-        current_line = ""
-
-        for word in words:
-            test_line = f"{current_line} {word}".strip()
-            width = stringWidth(test_line, "Helvetica", font_size)
-
-            if width > max_width:
-                lines.append(current_line)
-                current_line = word
-            else:
-                current_line = test_line
-
-        if current_line:
-            lines.append(current_line)
-
-        return lines
+            print(f"Error al guardar el  PDF: {e}")
 
     def save_as_txt(self):
         try:
@@ -73,3 +53,19 @@ class FileManager:
             print(f"Archivo guardado como {filename}")
         except Exception as e:
             print(f"Error al guardar el TXT: {e}")
+
+
+class Content:
+    def __init__(self, original_content=None, translated_content=None, enriched_content=None):
+        self.original_content = original_content
+        self.translated_content = translated_content
+        self.enriched_content = enriched_content
+
+    def set_original_content(self, content):
+        self.original_content = content
+
+    def set_translated_content(self, content):
+        self.translated_content = content
+
+    def set_enriched_content(self, content):
+        self.enriched_content = content
