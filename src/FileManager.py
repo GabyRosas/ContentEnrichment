@@ -1,5 +1,6 @@
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph
 
 
 class FileManager:
@@ -22,28 +23,26 @@ class FileManager:
     def save_as_pdf(self):
         try:
             filename = self.get_filename(".pdf")
-            c = canvas.Canvas(filename, pagesize=letter)
-            width, height = letter
+            doc = SimpleDocTemplate(filename, pagesize=A4, rightMargin=40, leftMargin=40, topMargin=60, bottomMargin=60)
 
-            # Check for ReportLab version and use appropriate alignment method
-            try:
-                # Attempt to use setTextAlignment if available (likely newer ReportLab)
-                text_object = c.beginText(40, height - 40)
-                text_object.setTextAlignment(0)  # 0 for left alignment
-            except AttributeError:
-                # Fallback to setting x and y coordinates for older ReportLab versions
-                text_object = c.beginText(40, height - 40)
+            styles = getSampleStyleSheet()
+            custom_style = ParagraphStyle(
+                name='Custom',
+                parent=styles['Normal'],
+                leading=14,
+                spaceAfter=12,
+            )
 
-            text_object.setFont("Helvetica", 12)
+            story = []
+            paragraphs = self.content.split('\n')
+            for para in paragraphs:
+                p = Paragraph(para, custom_style)
+                story.append(p)
 
-            for line in self.content.split('\n'):
-                text_object.textLine(line)
-
-            c.drawText(text_object)
-            c.save()
+            doc.build(story)
             print(f"Archivo guardado como {filename}")
         except Exception as e:
-            print(f"Error al guardar el  PDF: {e}")
+            print(f"Error al guardar el PDF: {e}")
 
     def save_as_txt(self):
         try:
