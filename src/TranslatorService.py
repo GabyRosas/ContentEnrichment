@@ -27,4 +27,3 @@ class TranslatorService:
                 translated_paragraphs.append(f"Error translating: {str(e)}")
         return translated_paragraphs
 
-

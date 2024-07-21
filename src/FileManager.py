@@ -1,12 +1,12 @@
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph
 
 
 class FileManager:
     def __init__(self, content, default_filename):
         self.content = content
         self.default_filename = default_filename
-        
 
     def get_filename(self, extension):
         try:
@@ -23,19 +23,26 @@ class FileManager:
     def save_as_pdf(self):
         try:
             filename = self.get_filename(".pdf")
-            c = canvas.Canvas(filename, pagesize=letter)
-            width, height = letter
-            text_object = c.beginText(40, height - 40)
-            text_object.setFont("Helvetica", 12)
+            doc = SimpleDocTemplate(filename, pagesize=A4, rightMargin=40, leftMargin=40, topMargin=60, bottomMargin=60)
 
-            for line in self.content.split('\n'):
-                text_object.textLine(line)
+            styles = getSampleStyleSheet()
+            custom_style = ParagraphStyle(
+                name='Custom',
+                parent=styles['Normal'],
+                leading=14,
+                spaceAfter=12,
+            )
 
-            c.drawText(text_object)
-            c.save()
+            story = []
+            paragraphs = self.content.split('\n')
+            for para in paragraphs:
+                p = Paragraph(para, custom_style)
+                story.append(p)
+
+            doc.build(story)
             print(f"Archivo guardado como {filename}")
         except Exception as e:
-            print(f"Error al guardar el  PDF: {e}")
+            print(f"Error al guardar el PDF: {e}")
 
     def save_as_txt(self):
         try:
