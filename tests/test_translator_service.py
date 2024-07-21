@@ -1,6 +1,7 @@
 import pytest
 from utils.TranslatorText import TranslatorText
 
+
 def test_invalid_language():
     translator = TranslatorText()
     text_input = 'Hola mundo'
@@ -22,3 +23,4 @@ def test_valid_translation():
 
     # Verificar que la traducción sea la esperada
     assert result == 'Hello World'
+
