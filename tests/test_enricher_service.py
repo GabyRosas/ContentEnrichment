@@ -1,8 +1,8 @@
 import pytest
+import requests
 from src.EnricherService import EnricherService
 
 
-# Es para simular que si enriquezca
 def mock_requests_post_success(url, json, headers):
     class MockResponse:
         @staticmethod
@@ -11,7 +11,6 @@ def mock_requests_post_success(url, json, headers):
     return MockResponse()
 
 
-# Y este para cuando no enriquezca
 def mock_requests_post_failure(url, json, headers):
     class MockResponse:
         @staticmethod
@@ -27,13 +26,12 @@ def enricher_service(monkeypatch):
 
 
 def test_enrich_success(enricher_service, monkeypatch):
-    # Verifica enriquecimiento
-    monkeypatch.setattr('requests.post', mock_requests_post_success)
-    assert enricher_service.enrich("Texto de prueba") == "Texto enriquecido"
+    monkeypatch.setattr(requests, 'post', mock_requests_post_success)
+    expected_output = EnricherService.wrap_text("Texto enriquecido", 100).split('\n')
+    assert enricher_service.enrich("Texto de prueba") == expected_output
 
 
 def test_enrich_failure(enricher_service, monkeypatch):
-    # Verifica que hay un problema en el enriquecimiento y regresaria el None
-    monkeypatch.setattr('requests.post', mock_requests_post_failure)
+    monkeypatch.setattr(requests, 'post', mock_requests_post_failure)
     assert enricher_service.enrich("Texto de prueba") is None
 

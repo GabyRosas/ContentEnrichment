@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class ScraperService:
     def __init__(self):
         try:
@@ -40,6 +41,7 @@ class ScraperService:
             print(f'Ocurrió un error: {e}')
             raise
 
+
     def format_content(self, content):
         try:
             capitalized_content = string.capwords(content)
@@ -49,6 +51,7 @@ class ScraperService:
         except Exception as e:
             print(f'Error al formatear el contenido: {e}')
             return ""
+
 
     def format_paragraphs(self, paragraphs, width=100, max_paragraphs=6):
         try:
@@ -63,6 +66,7 @@ class ScraperService:
             print(f'Error al formatear los párrafos: {e}')
             return []
 
+
     def remove_zwsp(self, text):
         try:
             zwsp_chars = ['\u200b', '\u200c', '\u200d', '\uFEFF']
@@ -72,6 +76,7 @@ class ScraperService:
         except Exception as e:
             print(f'Error al eliminar ZWSP: {e}')
             return text
+
 
     def remove_text_patterns(self, text):
         try:

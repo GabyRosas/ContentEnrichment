@@ -35,7 +35,7 @@ class ContentEnricher:
 
             enriched_content = EnricherService.enrich(original_paragraphs)
 
-            version_plus = "\n\n".join(enriched_content)
+            version_plus = "\n".join(enriched_content)
             content.set_enriched_content(version_plus)
 
             print("\nAhora te mostraremos el contenido Enriquecido:\n")
